@@ -33,11 +33,9 @@ class PaasInstance(models.Model):
         """Mock API call on creation"""
         for vals in vals_list:
             if not vals.get('paas_id'):
-                # Simulate API call to create instance and get ID
                 vals['paas_id'] = str(uuid.uuid4())[:8].upper()
                 _logger.info("Mock API: Created instance %s with PaaS ID %s", vals.get('name'), vals['paas_id'])
             
-            # Simulate setting a URL if running
             if vals.get('state') == 'running' and not vals.get('url'):
                 vals['url'] = f"https://{vals.get('name')}.odoo.com"
 
@@ -47,7 +45,7 @@ class PaasInstance(models.Model):
         """Mock API call on update"""
         res = super(PaasInstance, self).write(vals)
         for record in self:
-            _logger.info("Mock API: Updated instance %s (PaaS ID: %s) with values %s", record.name, record.paas_id, vals)
+            _logger.info("Mock API: Updated instance %s (PaaS ID: %s)", record.name, record.paas_id)
         return res
 
     def unlink(self):
@@ -59,7 +57,6 @@ class PaasInstance(models.Model):
     def action_sync_paas(self):
         """Action to simulate a manual sync from the PaaS"""
         for record in self:
-            # Randomly change state to simulate backend changes
             new_state = 'running' if record.state == 'provisioning' else record.state
             record.write({
                 'state': new_state,
