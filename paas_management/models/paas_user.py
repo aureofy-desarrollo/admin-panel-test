@@ -24,9 +24,15 @@ class PaasUser(models.Model):
 
     def action_create_invoice(self):
         self.ensure_one()
-        action = self.env["ir.actions.actions"]._for_xml_id("account.action_move_out_invoice_type")
-        action['context'] = {
-            'default_move_type': 'out_invoice',
-            'default_partner_id': self.partner_id.id,
+        return {
+            'name': _('New Invoice'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.move',
+            'view_mode': 'form',
+            'view_id': self.env.ref('account.view_move_form').id,
+            'context': {
+                'default_move_type': 'out_invoice',
+                'default_partner_id': self.partner_id.id,
+            },
+            'target': 'current',
         }
-        return action
