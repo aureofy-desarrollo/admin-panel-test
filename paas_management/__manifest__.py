@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'PaaS Management',
+    'version': '1.0',
+    'category': 'Management',
+    'summary': 'Manage Odoo instances from a PaaS',
+    'description': """
+        This module allows you to track and manage Odoo instances
+        retrieved from an external PaaS API.
+    """,
+    'author': 'Aureofy',
+    'website': 'https://aureofy.com',
+    'depends': ['base', 'contacts'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/res_partner_data.xml',
+        'views/paas_instance_views.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

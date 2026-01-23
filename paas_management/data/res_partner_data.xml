@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="partner_juan_perez" model="res.partner">
+            <field name="name">Juan Pérez</field>
+            <field name="email">juan.perez@example.com</field>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_juana_velasco" model="res.partner">
+            <field name="name">Juana Velasco</field>
+            <field name="email">juana.velasco@example.com</field>
+            <field name="customer_rank">1</field>
+        </record>
+    </data>
+</odoo>
