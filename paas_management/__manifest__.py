@@ -13,6 +13,7 @@
     'depends': ['base', 'contacts'],
     'data': [
         'security/ir.model.access.csv',
+        'views/paas_views.xml',
         'data/paas_data.xml',
     ],
     'installable': True,

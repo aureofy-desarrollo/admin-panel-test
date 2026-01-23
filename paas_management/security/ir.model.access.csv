@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_paas_instance_user,paas.instance.user,model_paas_instance,base.group_user,1,1,1,1
+access_paas_user_user,paas.user.user,model_paas_user,base.group_user,1,1,1,1
+access_paas_plan_user,paas.plan.user,model_paas_plan,base.group_user,1,1,1,1

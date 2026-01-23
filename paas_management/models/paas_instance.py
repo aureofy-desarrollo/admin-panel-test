@@ -11,7 +11,7 @@ class PaasInstance(models.Model):
 
     paas_id = fields.Char(string='PaaS ID', readonly=True, copy=False)
     name = fields.Char(string='Instance Name', required=True)
-    customer_id = fields.Many2one('res.partner', string='Customer', required=True)
+    user_id = fields.Many2one('paas.user', string='User', required=True)
     state = fields.Selection([
         ('provisioning', 'Provisioning'),
         ('running', 'Running'),

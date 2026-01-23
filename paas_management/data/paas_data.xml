@@ -1,64 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
-    <!-- Test Contacts -->
-    <record id="partner_juan_perez" model="res.partner">
-        <field name="name">Juan Pérez</field>
-        <field name="email">juan.perez@example.com</field>
-    </record>
+    <data>
+        <!-- Plan -->
+        <record id="plan_free" model="paas.plan">
+            <field name="name">Free</field>
+            <field name="limit_instances">1</field>
+            <field name="limit_storage_gb">10</field>
+            <field name="limit_staging_environments">1</field>
+            <field name="limit_workers">1</field>
+        </record>
 
-    <record id="partner_juana_velasco" model="res.partner">
-        <field name="name">Juana Velasco</field>
-        <field name="email">juana.velasco@example.com</field>
-    </record>
+        <!-- User -->
+        <record id="user_sebastiangulli" model="paas.user">
+            <field name="name">sebastiangulli</field>
+            <field name="email">sg.unleap@gmail.com</field>
+            <field name="github_id">146677193</field>
+            <field name="username">sebastiangulli</field>
+            <field name="plan_id" ref="plan_free"/>
+            <field name="last_login_at">2026-01-15 21:10:59</field>
+        </record>
 
-    <!-- Action -->
-    <record id="action_paas_instance" model="ir.actions.act_window">
-        <field name="name">PaaS Instances</field>
-        <field name="res_model">paas.instance</field>
-        <field name="view_mode">list,form</field>
-    </record>
+        <!-- Instances -->
+        <record id="instance_1" model="paas.instance">
+            <field name="paas_id">dsa8dq29d8j139d81</field>
+            <field name="name">Instance 1</field>
+            <field name="user_id" ref="user_sebastiangulli"/>
+            <field name="state">running</field>
+            <field name="odoo_version">18.0</field>
+        </record>
 
-    <!-- Menus -->
-    <menuitem id="menu_paas_root" name="PaaS Management" web_icon="paas_management,static/description/icon.png" sequence="10"/>
-    <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
-
-    <!-- List View -->
-    <record id="view_paas_instance_list" model="ir.ui.view">
-        <field name="name">paas.instance.list</field>
-        <field name="model">paas.instance</field>
-        <field name="arch" type="xml">
-            <list string="PaaS Instances">
-                <field name="paas_id"/>
-                <field name="name"/>
-                <field name="customer_id"/>
-                <field name="state" widget="badge" decoration-success="state == 'running'" decoration-info="state == 'provisioning'"/>
-                <field name="odoo_version"/>
-            </list>
-        </field>
-    </record>
-
-    <!-- Form View -->
-    <record id="view_paas_instance_form" model="ir.ui.view">
-        <field name="name">paas.instance.form</field>
-        <field name="model">paas.instance</field>
-        <field name="arch" type="xml">
-            <form string="PaaS Instance">
-                <header>
-                    <button name="action_sync_paas" string="Sync" type="object" class="oe_highlight"/>
-                    <field name="state" widget="statusbar"/>
-                </header>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="customer_id"/>
-                        <field name="odoo_version"/>
-                        <field name="paas_id"/>
-                        <field name="url" widget="url"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-</data>
+        <record id="instance_2" model="paas.instance">
+            <field name="paas_id">1123aaasdfasdf</field>
+            <field name="name">Instance 2</field>
+            <field name="user_id" ref="user_sebastiangulli"/>
+            <field name="state">stopped</field>
+            <field name="odoo_version">18.0</field>
+        </record>
+    </data>
 </odoo>

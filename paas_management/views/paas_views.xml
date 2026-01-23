@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PaaS User Views -->
+    <record id="view_paas_user_form" model="ir.ui.view">
+        <field name="name">paas.user.form</field>
+        <field name="model">paas.user</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="username"/>
+                            <field name="github_id"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="plan_id"/>
+                            <field name="last_login_at"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Instances">
+                            <field name="instance_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="paas_id"/>
+                                    <field name="state"/>
+                                    <field name="url" widget="url"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_paas_user_list" model="ir.ui.view">
+        <field name="name">paas.user.list</field>
+        <field name="model">paas.user</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="username"/>
+                <field name="email"/>
+                <field name="plan_id"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_paas_user" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="res_model">paas.user</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- PaaS Plan Views -->
+    <record id="view_paas_plan_form" model="ir.ui.view">
+        <field name="name">paas.plan.form</field>
+        <field name="model">paas.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="limit_instances"/>
+                        <field name="limit_storage_gb"/>
+                        <field name="limit_staging_environments"/>
+                        <field name="limit_workers"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_paas_plan_list" model="ir.ui.view">
+        <field name="name">paas.plan.list</field>
+        <field name="model">paas.plan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="limit_instances"/>
+                <field name="limit_storage_gb"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_paas_plan" model="ir.actions.act_window">
+        <field name="name">Plans</field>
+        <field name="res_model">paas.plan</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- PaaS Instance Views -->
+    <record id="view_paas_instance_list" model="ir.ui.view">
+        <field name="name">paas.instance.list</field>
+        <field name="model">paas.instance</field>
+        <field name="arch" type="xml">
+            <list string="PaaS Instances">
+                <field name="paas_id"/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="state" widget="badge" decoration-success="state == 'running'" decoration-info="state == 'provisioning'"/>
+                <field name="odoo_version"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_paas_instance_form" model="ir.ui.view">
+        <field name="name">paas.instance.form</field>
+        <field name="model">paas.instance</field>
+        <field name="arch" type="xml">
+            <form string="PaaS Instance">
+                <header>
+                    <button name="action_sync_paas" string="Sync" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="user_id"/>
+                        <field name="odoo_version"/>
+                        <field name="paas_id"/>
+                        <field name="url" widget="url"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_paas_instance" model="ir.actions.act_window">
+        <field name="name">Instances</field>
+        <field name="res_model">paas.instance</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_paas_root" name="PaaS Management" web_icon="paas_management,static/description/icon.png" sequence="10"/>
+    <menuitem id="menu_paas_user" name="Users" parent="menu_paas_root" action="action_paas_user" sequence="10"/>
+    <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="20"/>
+    <menuitem id="menu_paas_config" name="Configuration" parent="menu_paas_root" sequence="30"/>
+    <menuitem id="menu_paas_plan" name="Plans" parent="menu_paas_config" action="action_paas_plan" sequence="10"/>
+
+</odoo>
