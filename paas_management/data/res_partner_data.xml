@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data>
         <record id="partner_juan_perez" model="res.partner">
             <field name="name">Juan Pérez</field>
             <field name="email">juan.perez@example.com</field>
@@ -10,9 +10,7 @@
             <field name="name">Juana Velasco</field>
             <field name="email">juana.velasco@example.com</field>
         </record>
-    </data>
 
-    <data>
         <record id="view_paas_instance_tree" model="ir.ui.view">
             <name>paas.instance.tree</name>
             <model>paas.instance</model>
