@@ -16,11 +16,11 @@ class PaasUser(models.Model):
     
     # Owned instances is handled by the reverse relation instance_ids
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         # Ensure email from partner is reachable if needed, 
         # but _inherits handles the creation of the partner given the partner fields.
-        return super(PaasUser, self).create(vals)
+        return super(PaasUser, self).create(vals_list)
 
     def action_create_invoice(self):
         self.ensure_one()
