@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data noupdate="1">
+<data>
     <!-- Test Contacts -->
     <record id="partner_juan_perez" model="res.partner">
         <field name="name">Juan Pérez</field>
@@ -20,7 +20,7 @@
     </record>
 
     <!-- Menus -->
-    <menuitem id="menu_paas_root" name="PaaS Management" sequence="10"/>
+    <menuitem id="menu_paas_root" name="PaaS Management" web_icon="paas_management,static/description/icon.png" sequence="10"/>
     <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
 
     <!-- List View -->
