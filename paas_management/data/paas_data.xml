@@ -1,12 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data noupdate="1">
-<record id="partner_juan_perez" model="res.partner"><field name="name">Juan Pérez</field><field name="email">juan.perez@example.com</field></record>
-<record id="partner_juana_velasco" model="res.partner"><field name="name">Juana Velasco</field><field name="email">juana.velasco@example.com</field></record>
-<record id="action_paas_instance" model="ir.actions.act_window"><field name="name">PaaS Instances</field><field name="res_model">paas.instance</field><field name="view_mode">tree,form</field></record>
-<menuitem id="menu_paas_root" name="PaaS Management" sequence="10"/>
-<menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
-<record id="view_paas_instance_tree" model="ir.ui.view"><field name="name">paas.instance.tree</field><field name="model">paas.instance</field><field name="arch" type="xml"><tree><field name="paas_id"/><field name="name"/><field name="customer_id"/><field name="state"/></tree></field></record>
-<record id="view_paas_instance_form" model="ir.ui.view"><field name="name">paas.instance.form</field><field name="model">paas.instance</field><field name="arch" type="xml"><form><header><button name="action_sync_paas" string="Sync" type="object"/><field name="state" widget="statusbar"/></header><sheet><group><field name="name"/><field name="customer_id"/><field name="odoo_version"/><field name="paas_id"/><field name="url"/></group></sheet></form></field></record>
-</data>
+    <data>
+        <!-- Test Contacts -->
+        <record id="partner_juan_perez" model="res.partner">
+            <field name="name">Juan Pérez</field>
+            <field name="email">juan.perez@example.com</field>
+        </record>
+
+        <record id="partner_juana_velasco" model="res.partner">
+            <field name="name">Juana Velasco</field>
+            <field name="email">juana.velasco@example.com</field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_paas_instance_list" model="ir.ui.view">
+            <name>paas.instance.list</name>
+            <model>paas.instance</model>
+            <arch type="xml">
+                <list string="PaaS Instances">
+                    <field name="paas_id"/>
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                    <field name="state" widget="badge" decoration-success="state == 'running'" decoration-info="state == 'provisioning'"/>
+                    <field name="odoo_version"/>
+                </list>
+            </arch>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_paas_instance_form" model="ir.ui.view">
+            <name>paas.instance.form</name>
+            <model>paas.instance</model>
+            <arch type="xml">
+                <form string="PaaS Instance">
+                    <header>
+                        <button name="action_sync_paas" string="Sync with PaaS" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                            <field name="odoo_version"/>
+                            <field name="paas_id"/>
+                            <field name="url" widget="url"/>
+                        </group>
+                    </sheet>
+                </form>
+            </arch>
+        </record>
+
+        <!-- Action -->
+        <record id="action_paas_instance" model="ir.actions.act_window">
+            <name>PaaS Instances</name>
+            <res_model>paas.instance</res_model>
+            <view_mode>list,form</view_mode>
+        </record>
+
+        <!-- Menus -->
+        <menuitem id="menu_paas_root" name="PaaS Management" sequence="10"/>
+        <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
+    </data>
 </odoo>
