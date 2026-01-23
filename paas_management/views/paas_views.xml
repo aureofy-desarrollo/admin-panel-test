@@ -78,6 +78,7 @@
                         <field name="limit_storage_gb"/>
                         <field name="limit_staging_environments"/>
                         <field name="limit_workers"/>
+                        <field name="product_id"/>
                     </group>
                 </sheet>
             </form>

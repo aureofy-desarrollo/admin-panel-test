@@ -10,7 +10,7 @@
     """,
     'author': 'Aureofy',
     'website': 'https://aureofy.com',
-    'depends': ['base', 'contacts', 'account'],
+    'depends': ['base', 'contacts', 'account', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'views/paas_views.xml',
