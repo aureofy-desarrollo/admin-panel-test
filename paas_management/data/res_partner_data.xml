@@ -1,57 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="partner_juan_perez" model="res.partner">
-        <field name="name">Juan Pérez</field>
-        <field name="email">juan.perez@example.com</field>
-    </record>
+    <data noupdate="1">
+        <record id="partner_juan_perez" model="res.partner">
+            <field name="name">Juan Pérez</field>
+            <field name="email">juan.perez@example.com</field>
+        </record>
 
-    <record id="partner_juana_velasco" model="res.partner">
-        <field name="name">Juana Velasco</field>
-        <field name="email">juana.velasco@example.com</field>
-    </record>
-
-    <record id="view_paas_instance_tree" model="ir.ui.view">
-        <name>paas.instance.tree</name>
-        <model>paas.instance</model>
-        <arch type="xml">
-            <tree string="PaaS Instances">
-                <field name="paas_id"/>
-                <field name="name"/>
-                <field name="customer_id"/>
-                <field name="state"/>
-                <field name="odoo_version"/>
-            </tree>
-        </arch>
-    </record>
-
-    <record id="view_paas_instance_form" model="ir.ui.view">
-        <name>paas.instance.form</name>
-        <model>paas.instance</model>
-        <arch type="xml">
-            <form string="PaaS Instance">
-                <header>
-                    <button name="action_sync_paas" string="Sync with PaaS" type="object" class="oe_highlight"/>
-                    <field name="state" widget="statusbar"/>
-                </header>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="customer_id"/>
-                        <field name="odoo_version"/>
-                        <field name="paas_id"/>
-                        <field name="url"/>
-                    </group>
-                </sheet>
-            </form>
-        </arch>
-    </record>
-
-    <record id="action_paas_instance" model="ir.actions.act_window">
-        <name>PaaS Instances</name>
-        <res_model>paas.instance</res_model>
-        <view_mode>tree,form</view_mode>
-    </record>
-
-    <menuitem id="menu_paas_root" name="PaaS Management" sequence="10"/>
-    <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
+        <record id="partner_juana_velasco" model="res.partner">
+            <field name="name">Juana Velasco</field>
+            <field name="email">juana.velasco@example.com</field>
+        </record>
+    </data>
 </odoo>
