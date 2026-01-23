@@ -4,15 +4,13 @@
         <name>paas.instance.tree</name>
         <model>paas.instance</model>
         <arch type="xml">
-            <tree string="PaaS Instances">
+            <list string="PaaS Instances">
                 <field name="paas_id"/>
                 <field name="name"/>
                 <field name="customer_id"/>
                 <field name="odoo_version"/>
-                <field name="state" widget="badge" decoration-success="state == 'running'" decoration-info="state == 'provisioning'" decoration-danger="state == 'error'" decoration-warning="state == 'stopped'"/>
-                <field name="url" widget="url"/>
-                <field name="last_sync"/>
-            </tree>
+                <field name="state"/>
+            </list>
         </arch>
     </record>
 
@@ -23,59 +21,27 @@
             <form string="PaaS Instance">
                 <header>
                     <button name="action_sync_paas" string="Sync with PaaS" type="object" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" statusbar_visible="provisioning,running,stopped,error"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" placeholder="e.g. Production Instance"/>
-                        </h1>
-                    </div>
                     <group>
-                        <group>
-                            <field name="customer_id"/>
-                            <field name="odoo_version"/>
-                        </group>
-                        <group>
-                            <field name="paas_id"/>
-                            <field name="url" widget="url"/>
-                            <field name="last_sync"/>
-                        </group>
+                        <field name="name"/>
+                        <field name="customer_id"/>
+                        <field name="odoo_version"/>
+                        <field name="paas_id"/>
+                        <field name="url"/>
                     </group>
                 </sheet>
             </form>
         </arch>
     </record>
 
-    <record id="view_paas_instance_search" model="ir.ui.view">
-        <name>paas.instance.search</name>
-        <model>paas.instance</model>
-        <arch type="xml">
-            <search string="Search Instances">
-                <field name="name"/>
-                <field name="paas_id"/>
-                <field name="customer_id"/>
-                <filter string="Running" name="running" domain="[('state', '=', 'running')]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Customer" name="group_customer" context="{'group_by': 'customer_id'}"/>
-                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
-                    <filter string="Odoo Version" name="group_version" context="{'group_by': 'odoo_version'}"/>
-                </group>
-            </search>
-        </arch>
-    </record>
-
     <record id="action_paas_instance" model="ir.actions.act_window">
         <name>PaaS Instances</name>
         <res_model>paas.instance</res_model>
-        <view_mode>tree,form</view_mode>
-        <help type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Manage your Odoo instances from the PaaS.
-            </p>
-        </help>
+        <view_mode>list,form</view_mode>
     </record>
 
-        <menuitem id="menu_paas_root" name="PaaS Management" web_icon="paas_management,static/description/icon.png" sequence="10"/>
+    <menuitem id="menu_paas_root" name="PaaS Management" sequence="10"/>
     <menuitem id="menu_paas_instance" name="Instances" parent="menu_paas_root" action="action_paas_instance" sequence="10"/>
 </odoo>
