@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 import uuid
 from odoo import models, fields, api, _
