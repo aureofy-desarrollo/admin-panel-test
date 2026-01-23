@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 class PaasUser(models.Model):
     _name = 'paas.user'
@@ -21,3 +21,12 @@ class PaasUser(models.Model):
         # Ensure email from partner is reachable if needed, 
         # but _inherits handles the creation of the partner given the partner fields.
         return super(PaasUser, self).create(vals)
+
+    def action_create_invoice(self):
+        self.ensure_one()
+        action = self.env["ir.actions.actions"]._for_xml_id("account.action_move_out_invoice_type")
+        action['context'] = {
+            'default_move_type': 'out_invoice',
+            'default_partner_id': self.partner_id.id,
+        }
+        return action

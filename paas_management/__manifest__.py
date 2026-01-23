@@ -10,10 +10,11 @@
     """,
     'author': 'Aureofy',
     'website': 'https://aureofy.com',
-    'depends': ['base', 'contacts'],
+    'depends': ['base', 'contacts', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'views/paas_views.xml',
+        'views/res_partner_views.xml',
         'data/paas_data.xml',
     ],
     'installable': True,
