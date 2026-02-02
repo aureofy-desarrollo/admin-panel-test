@@ -45,3 +45,14 @@ class PaasUser(models.Model):
             'context': context,
             'target': 'current',
         }
+
+    def action_view_partner(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Contact'),
+            'res_model': 'res.partner',
+            'view_mode': 'form',
+            'res_id': self.partner_id.id,
+            'target': 'current',
+        }
