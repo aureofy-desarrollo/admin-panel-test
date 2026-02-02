@@ -27,6 +27,7 @@ class PaasUser(models.Model):
         context = {
             'default_move_type': 'out_invoice',
             'default_partner_id': self.partner_id.id,
+            'default_company_id': self.env.company.id,
         }
         if self.plan_id and self.plan_id.product_id:
             context['default_invoice_line_ids'] = [
