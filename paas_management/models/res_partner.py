@@ -13,11 +13,20 @@ class ResPartner(models.Model):
 
     def action_view_paas_user(self):
         self.ensure_one()
-        return {
+        action = {
             'name': 'PaaS Users',
             'type': 'ir.actions.act_window',
             'res_model': 'paas.user',
-            'view_mode': 'list,form',
             'domain': [('partner_id', '=', self.id)],
             'context': {'default_partner_id': self.id},
         }
+        if len(self.paas_user_ids) == 1:
+            action.update({
+                'view_mode': 'form',
+                'res_id': self.paas_user_ids.id,
+            })
+        else:
+            action.update({
+                'view_mode': 'list,form',
+            })
+        return action
