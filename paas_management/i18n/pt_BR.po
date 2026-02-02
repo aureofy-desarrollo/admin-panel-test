@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* paas_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-02 12:30+0000\n"
+"PO-Revision-Date: 2026-02-02 12:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__product_id
+msgid "Associated Product"
+msgstr "Produto associado"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__limit_staging_environments
+msgid "Staging Env Limit"
+msgstr "Limite de ambientes de teste"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__limit_storage_gb
+msgid "Storage Limit (GB)"
+msgstr "Limite de armazenamento (GB)"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__limit_workers
+msgid "Worker Limit"
+msgstr "Limite de workers"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__limit_instances
+msgid "Instance Limit"
+msgstr "Limite de instâncias"
+
+#. module: paas_management
+#: model:ir.model,name:paas_management.model_paas_plan
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__plan_id
+#: model:ir.ui.view,arch_db:paas_management.view_paas_plan_form
+#: model:ir.ui.view,arch_db:paas_management.view_paas_plan_list
+msgid "Plan"
+msgstr "Plano"
+
+#. module: paas_management
+#: model:ir.actions.act_window,name:paas_management.action_paas_plan
+#: model:ir.ui.menu,name:paas_management.menu_paas_plan
+msgid "Plans"
+msgstr "Planos"
+
+#. module: paas_management
+#: model:ir.model,name:paas_management.model_paas_user
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__user_id
+#: model:ir.model.fields,field_description:paas_management.field_res_partner__paas_user_ids
+msgid "PaaS User"
+msgstr "Usuário PaaS"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_res_partner__paas_user_count
+msgid "PaaS User Count"
+msgstr "Contagem de Usuários PaaS"
+
+#. module: paas_management
+#: model:ir.actions.act_window,name:paas_management.action_paas_user
+#: model:ir.ui.menu,name:paas_management.menu_paas_user
+msgid "Users"
+msgstr "Usuários"
+
+#. module: paas_management
+#: model:ir.model,name:paas_management.model_paas_instance
+#: model:ir.ui.view,arch_db:paas_management.view_paas_instance_form
+#: model:ir.ui.view,arch_db:paas_management.view_paas_instance_list
+msgid "PaaS Odoo Instance"
+msgstr "Instância do Odoo PaaS"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__paas_id
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__github_id
+msgid "PaaS ID"
+msgstr "ID PaaS"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__name
+#: model:ir.model.fields,field_description:paas_management.field_paas_plan__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__state
+msgid "State"
+msgstr "Estado"
+
+#. module: paas_management
+#: selection:paas.instance,state:0
+msgid "Provisioning"
+msgstr "Provisionando"
+
+#. module: paas_management
+#: selection:paas.instance,state:0
+msgid "Running"
+msgstr "Em execução"
+
+#. module: paas_management
+#: selection:paas.instance,state:0
+msgid "Stopped"
+msgstr "Parado"
+
+#. module: paas_management
+#: selection:paas.instance,state:0
+msgid "Error"
+msgstr "Erro"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__odoo_version
+msgid "Odoo Version"
+msgstr "Versão do Odoo"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__url
+msgid "URL"
+msgstr "URL"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_instance__last_sync
+msgid "Last Sync"
+msgstr "Última sincronização"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__username
+msgid "Username"
+msgstr "Nome de usuário"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__last_login_at
+msgid "Last Login"
+msgstr "Último login"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__instance_ids
+#: model:ir.ui.view,arch_db:paas_management.view_paas_user_form
+msgid "Instances"
+msgstr "Instâncias"
+
+#. module: paas_management
+#: model:ir.actions.act_window,name:paas_management.action_paas_instance
+#: model:ir.ui.menu,name:paas_management.menu_paas_instance
+msgid "Instances"
+msgstr "Instâncias"
+
+#. module: paas_management
+#: model:ir.ui.view,arch_db:paas_management.view_paas_user_form
+msgid "Create Invoice"
+msgstr "Criar fatura"
+
+#. module: paas_management
+#: model:ir.ui.view,arch_db:paas_management.view_paas_instance_form
+msgid "Sync"
+msgstr "Sincronizar"
+
+#. module: paas_management
+#: model:ir.ui.menu,name:paas_management.menu_paas_root
+msgid "PaaS Management"
+msgstr "Gerenciamento PaaS"
+
+#. module: paas_management
+#: model:ir.ui.menu,name:paas_management.menu_paas_config
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: paas_management
+#: model:ir.model.fields,field_description:paas_management.field_paas_user__github_id
+msgid "GitHub ID"
+msgstr "ID do GitHub"
+
+#. module: paas_management
+#: code:addons/paas_management/models/paas_user.py:0
+#, python-format
+msgid "New Invoice"
+msgstr "Nova fatura"
