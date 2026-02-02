@@ -24,15 +24,23 @@ class PaasUser(models.Model):
 
     def action_create_invoice(self):
         self.ensure_one()
+        context = {
+            'default_move_type': 'out_invoice',
+            'default_partner_id': self.partner_id.id,
+        }
+        if self.plan_id and self.plan_id.product_id:
+            context['default_invoice_line_ids'] = [
+                (0, 0, {
+                    'product_id': self.plan_id.product_id.id,
+                    'quantity': 1,
+                })
+            ]
         return {
             'name': _('New Invoice'),
             'type': 'ir.actions.act_window',
             'res_model': 'account.move',
             'view_mode': 'form',
             'view_id': self.env.ref('account.view_move_form').id,
-            'context': {
-                'default_move_type': 'out_invoice',
-                'default_partner_id': self.partner_id.id,
-            },
+            'context': context,
             'target': 'current',
         }
