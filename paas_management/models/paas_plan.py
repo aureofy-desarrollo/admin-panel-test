@@ -1,3 +1,7 @@
+import logging
+
+_logger = logging.getLogger(__name__)
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
@@ -34,23 +38,30 @@ class PaasPlan(models.Model):
                 })
                 vals['product_id'] = product.id
             
-            # API Call
-            api_data = {
-                "name": vals.get('name'),
-                "slug": vals.get('slug'),
-                "price": vals.get('price', 0.0),
-                "currency": vals.get('currency', 'USD'),
-                "limits": {
-                    "instances": vals.get('limit_instances', 0),
-                    "storageGB": vals.get('limit_storage_gb', 0.0),
-                    "workers": vals.get('limit_workers', 0)
+            # API Call - Only if config exists
+            config = self.env['paas.config'].get_config(silent=True)
+            if config:
+                api_data = {
+                    "name": vals.get('name'),
+                    "slug": vals.get('slug'),
+                    "price": vals.get('price', 0.0),
+                    "currency": vals.get('currency', 'USD'),
+                    "limits": {
+                        "instances": vals.get('limit_instances', 0),
+                        "storageGB": vals.get('limit_storage_gb', 0.0),
+                        "workers": vals.get('limit_workers', 0)
+                    }
                 }
-            }
-            response = self.env['paas.client']._make_request('POST', '/api/plans', data=api_data)
-            if response and isinstance(response, dict) and response.get('_id'):
-                vals['paas_id'] = response.get('_id')
-            elif response and isinstance(response, dict) and response.get('id'):
-                 vals['paas_id'] = response.get('id')
+                try:
+                    response = self.env['paas.client']._make_request('POST', '/api/plans', data=api_data)
+                    if response and isinstance(response, dict) and response.get('_id'):
+                        vals['paas_id'] = response.get('_id')
+                    elif response and isinstance(response, dict) and response.get('id'):
+                         vals['paas_id'] = response.get('id')
+                except Exception as e:
+                    _logger.warning("Failed to sync plan %s with backend: %s", vals.get('name'), str(e))
+            else:
+                _logger.info("Skipping API sync for plan %s: No active configuration found.", vals.get('name'))
 
         return super(PaasPlan, self).create(vals_list)
 
@@ -75,7 +86,14 @@ class PaasPlan(models.Model):
                         "workers": rec.limit_workers
                     }
                 }
-                self.env['paas.client']._make_request('PUT', f'/api/plans/{rec.paas_id}', data=api_data)
+                try:
+                    config = self.env['paas.config'].get_config(silent=True)
+                    if config:
+                        self.env['paas.client']._make_request('PUT', f'/api/plans/{rec.paas_id}', data=api_data)
+                    else:
+                        _logger.info("Skipping API update for plan %s: No active configuration found.", rec.name)
+                except Exception as e:
+                    _logger.error("Error updating plan %s in backend: %s", rec.name, str(e))
                 
                 if 'name' in vals and rec.product_id:
                     rec.product_id.name = vals['name']
@@ -85,7 +103,11 @@ class PaasPlan(models.Model):
         return res
 
     def unlink(self):
+        config = self.env['paas.config'].get_config(silent=True)
         for rec in self:
-            if rec.paas_id:
-                self.env['paas.client']._make_request('DELETE', f'/api/plans/{rec.paas_id}')
+            if rec.paas_id and config:
+                try:
+                    self.env['paas.client']._make_request('DELETE', f'/api/plans/{rec.paas_id}')
+                except Exception as e:
+                    _logger.error("Error deleting plan %s from backend: %s", rec.name, str(e))
         return super(PaasPlan, self).unlink()

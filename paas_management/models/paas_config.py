@@ -15,9 +15,11 @@ class PaasConfig(models.Model):
     active = fields.Boolean(string='Active', default=True)
 
     @api.model
-    def get_config(self):
+    def get_config(self, silent=False):
         config = self.search([('active', '=', True)], limit=1)
         if not config:
+            if silent:
+                return False
             raise UserError(_("No active PaaS configuration found. Please create one in Configuration."))
         return config
 
