@@ -28,6 +28,9 @@ class PaasPlan(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            if not vals.get('slug') and vals.get('name'):
+                vals['slug'] = vals.get('name').lower().replace(' ', '-')
+                
             if not vals.get('product_id'):
                 product = self.env['product.product'].create({
                     'name': vals.get('name'),

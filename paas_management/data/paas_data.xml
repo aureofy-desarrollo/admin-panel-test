@@ -4,6 +4,7 @@
         <!-- Plan -->
         <record id="plan_free" model="paas.plan">
             <field name="name">Free</field>
+            <field name="slug">free</field>
             <field name="limit_instances">1</field>
             <field name="limit_storage_gb">10</field>
             <field name="limit_staging_environments">1</field>
