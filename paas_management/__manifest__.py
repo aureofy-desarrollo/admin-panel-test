@@ -13,9 +13,9 @@
     'depends': ['base', 'contacts', 'account', 'product'],
     'data': [
         'security/ir.model.access.csv',
+        'views/paas_views.xml',
         'views/paas_config_views.xml',
         'views/paas_sync_views.xml',
-        'views/paas_views.xml',
         'views/res_partner_views.xml',
         'data/paas_data.xml',
     ],
