@@ -7,7 +7,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_create_invoice" string="Create Invoice" type="object" class="oe_highlight"/>
+                    <button name="action_update_license" string="Update License in Backend" type="object" class="oe_highlight"/>
+                    <button name="action_create_invoice" string="Create Invoice" type="object"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -23,9 +24,13 @@
                             <field name="username"/>
                             <field name="github_id"/>
                             <field name="email"/>
+                            <field name="paas_id"/>
                         </group>
                         <group>
                             <field name="plan_id"/>
+                            <field name="subscription_status"/>
+                            <field name="subscription_start_date"/>
+                            <field name="subscription_end_date"/>
                             <field name="last_login_at"/>
                         </group>
                     </group>
@@ -77,11 +82,19 @@
                         <h1><field name="name"/></h1>
                     </div>
                     <group>
-                        <field name="limit_instances"/>
-                        <field name="limit_storage_gb"/>
-                        <field name="limit_staging_environments"/>
-                        <field name="limit_workers"/>
-                        <field name="product_id"/>
+                        <group>
+                            <field name="slug"/>
+                            <field name="price"/>
+                            <field name="currency"/>
+                        </group>
+                        <group>
+                            <field name="limit_instances"/>
+                            <field name="limit_storage_gb"/>
+                            <field name="limit_staging_environments"/>
+                            <field name="limit_workers"/>
+                            <field name="product_id"/>
+                            <field name="paas_id"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
